@@ -1,0 +1,90 @@
+@page "/budget"
+@using MongoDB.Driver
+@using MongoDB.Driver.Linq
+@using PersonalPlanner.Data
+@inject MongoDBContext dbContext
+@inject PersonalPlanner.Data.MongoDBContext DB
+@inject NavigationManager NavigationManager
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@using Microsoft.AspNetCore.Components.Authorization
+@using System.Security.Claims
+@using PersonalPlanner
+@rendermode InteractiveServer
+
+<PageTitle>Budgets</PageTitle>
+
+<h1>Existing Budgets</h1>
+
+<p>
+    <a href="/budget/create" class="btn btn-primary">Create New Budget</a>
+</p>
+
+@if (Budgets == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Amount</th>
+                <th>Currency</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var budget in budgets)
+            {
+                <tr>
+                    <td>@budget.Title</td>
+                    <td>@budget.Amount</td>
+                    <td>@budget.Currency</td>
+                    <td>@budget.StartDate?.ToString("MM/dd/yyyy")</td>
+                    <td>@budget.EndDate?.ToString("MM/dd/yyyy")</td>
+                    <td>
+                        <a href="@($"/budget/edit?id={budget.Id}")">Update</a> |
+                        <a href="@($"/budget/Delete?id={budget.Id}")">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private string filter = "";
+    private List<Budget> budgets = new List<Budget>();
+    private List<Budget> Budgets => GetTasks();
+    private string currentUserName;
+    private string currentUserRole;
+
+    protected override async Task OnInitializedAsync()
+    {
+
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        currentUserName = authState.User.Identity.Name;
+        currentUserRole = authState.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value;
+
+        if (currentUserRole == "Administrator")
+        {
+            budgets = await dbContext.Budgets.Find(_ => true).ToListAsync();
+        }
+        else if (!string.IsNullOrEmpty(currentUserName))
+        {
+            budgets = await dbContext.Budgets.Find(budge => budge.user_name == currentUserName).ToListAsync();
+        }
+        
+        StateHasChanged();
+    }
+
+    private List<Budget> GetTasks()
+    {
+        var filteredBudget = string.IsNullOrEmpty(filter)
+        ? budgets
+        : budgets.Where(budge => budge.Title.Contains(filter, StringComparison.OrdinalIgnoreCase)).ToList();
+        return filteredBudget.ToList();
+    }
+}

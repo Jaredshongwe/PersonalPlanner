@@ -1,0 +1,59 @@
+﻿@page "/Goals/details"
+@using PersonalPlanner.Data
+@using PersonalPlanner.Models.ViewModels
+@using PersonalPlanner.Models
+@using MongoDB.Driver
+@inject MongoDBContext dbContext
+@inject NavigationManager navigationManager
+
+<PageTitle>Details</PageTitle>
+
+<h1>Details</h1>
+
+<div>
+    <h4>Goal</h4>
+    <hr />
+    @if (Goal is null)
+    {
+        <p><em>Loading...</em></p>
+    }
+    else
+    {
+        <dl class="row">
+            <dt class="col-sm-2">Title:</dt>
+            <dd class="col-sm-10">@Goal.Title</dd>
+            <dt class="col-sm-2">Goal Date:</dt>
+            <dd class="col-sm-10">@Goal.GoalDate</dd>
+            <dt class="col-sm-2">Description:</dt>
+            <dd class="col-sm-10">@Goal.Description</dd>
+            <dt class="col-sm-2">Amount:</dt>
+            <dd class="col-sm-10">@Goal.Amount</dd>
+        </dl>
+        <div>
+            <a href="@($"/Goals/edit?id={Goal.Id}")">Edit</a> |
+            <a href="@($"/Goals")">Back to List</a>
+        </div>
+    }
+</div>
+
+@code {
+    public Goal Goal { get; set; } = new();
+    protected override async Task OnInitializedAsync()
+    {
+        var uri = navigationManager.ToAbsoluteUri(navigationManager.Uri);
+        var query = Microsoft.AspNetCore.WebUtilities.QueryHelpers.ParseQuery(uri.Query);
+        if (query.TryGetValue("id", out var idValue) && int.TryParse(idValue, out var id))
+        {
+            var filter = Builders<Goal>.Filter.Eq(t => t.Id, id);
+            Goal = await dbContext.Goal.Find(filter).FirstOrDefaultAsync();
+            if (Goal == null)
+            {
+                navigationManager.NavigateTo("notfound");
+            }
+        }
+        else
+        {
+            navigationManager.NavigateTo("/Goals");
+        }
+    }
+}
