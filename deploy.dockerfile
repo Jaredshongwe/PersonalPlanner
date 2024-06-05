@@ -13,7 +13,6 @@ COPY . ./
 RUN dotnet build -c Release -o /app/build
 
 # Publish the application
-FROM build AS publish
 RUN dotnet publish -c Release -o /app/publish
 
 # Use the ASP.NET Core runtime as the base image for running the application
