@@ -1,0 +1,53 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\Jared\\Documents\\BYU\\CSE 325\\Final deploy\\PersonalPlanner\\obj\\Release\\net8.0\\scopedcss\\projectbundle\\PersonalPlanner.bundle.scp.css",
+      "PackagePath": "staticwebassets\\PersonalPlanner.bundle.scp.css"
+    },
+    {
+      "Id": "C:\\Users\\Jared\\Documents\\BYU\\CSE 325\\Final deploy\\PersonalPlanner\\wwwroot\\app.css",
+      "PackagePath": "staticwebassets\\app.css"
+    },
+    {
+      "Id": "C:\\Users\\Jared\\Documents\\BYU\\CSE 325\\Final deploy\\PersonalPlanner\\wwwroot\\bootstrap\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css"
+    },
+    {
+      "Id": "C:\\Users\\Jared\\Documents\\BYU\\CSE 325\\Final deploy\\PersonalPlanner\\wwwroot\\bootstrap\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Jared\\Documents\\BYU\\CSE 325\\Final deploy\\PersonalPlanner\\wwwroot\\favicon.png",
+      "PackagePath": "staticwebassets\\favicon.png"
+    },
+    {
+      "Id": "C:\\Users\\Jared\\Documents\\BYU\\CSE 325\\Final deploy\\PersonalPlanner\\wwwroot\\images\\access-denied.png",
+      "PackagePath": "staticwebassets\\images\\access-denied.png"
+    },
+    {
+      "Id": "C:\\Users\\Jared\\Documents\\BYU\\CSE 325\\Final deploy\\PersonalPlanner\\wwwroot\\images\\avatar.png",
+      "PackagePath": "staticwebassets\\images\\avatar.png"
+    },
+    {
+      "Id": "C:\\Users\\Jared\\Documents\\BYU\\CSE 325\\Final deploy\\PersonalPlanner\\wwwroot\\images\\logout.png",
+      "PackagePath": "staticwebassets\\images\\logout.png"
+    },
+    {
+      "Id": "obj\\Release\\net8.0\\staticwebassets\\msbuild.PersonalPlanner.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Release\\net8.0\\staticwebassets\\msbuild.build.PersonalPlanner.props",
+      "PackagePath": "build\\PersonalPlanner.props"
+    },
+    {
+      "Id": "obj\\Release\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.PersonalPlanner.props",
+      "PackagePath": "buildMultiTargeting\\PersonalPlanner.props"
+    },
+    {
+      "Id": "obj\\Release\\net8.0\\staticwebassets\\msbuild.buildTransitive.PersonalPlanner.props",
+      "PackagePath": "buildTransitive\\PersonalPlanner.props"
+    }
+  ],
+  "ElementsToRemove": []
+}
