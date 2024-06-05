@@ -16,9 +16,9 @@ RUN dotnet build -c Release -o /app/build
 RUN dotnet publish -c Release -o /app/publish
 
 # Use the ASP.NET Core runtime as the base image for running the application
-FROM mcr.microsoft.com/dotnet/aspnet AS final
+FROM mcr.microsoft.com/dotnet/aspnet AS runtime
 WORKDIR /app
-COPY --from=publish /app/publish .
+COPY --from=build /app/publish .
 
 # Set the environment variables
 ENV MONGODB_CONNECTION_STRING=mongodb+srv://team04:X0QZDHtKPev5cv1B@team4cluster.hfsodnz.mongodb.net/
